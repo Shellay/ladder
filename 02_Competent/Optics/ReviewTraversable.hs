@@ -1,6 +1,9 @@
 import Control.Applicative
 import Control.Monad.Trans.State
 
+-- Contents are from Haskell wikibook.
+
+
 -- *** Functors made for walking *** ---
 --
 -- Analogous: foldr with applicative!
@@ -61,7 +64,7 @@ instance Foldable Tree where
   -- foldMap :: (Monoid m, Foldable t) => (a -> m) -> t a -> m
   -- foldMap :: (Monoid m) => (a -> m) -> Tree a -> m
   foldMap _ Leaf = mempty
-  foldMap h (Branch a l r) = (foldMap h l) `mappend` h a `mappend` (foldMap h r)
+  foldMap h (Branch a l r) = foldMap h l `mappend` h a `mappend` foldMap h r
 
 instance Traversable Tree where
   -- traverse :: Applicative f => (a -> f b) -> Tree a -> f (Tree b)
@@ -85,7 +88,7 @@ matTrans (r:rs) = zipWith (:) r $ matTrans rs
 
 matTrans1 :: [[a]] -> [[a]]
 matTrans1 ([]:_) = []
-matTrans1 rs = (map head rs) : (matTrans1 $ map tail rs)
+matTrans1 rs = map head rs : matTrans1 (map tail rs)
 
 
 transpose1 :: [[a]] -> [[a]]
@@ -258,6 +261,7 @@ instance Monoid a => Applicative (Const a) where
 -}
 
 -- (<*>) between (Const) simply accumulates the first monoidal component
+foldMap' :: (Monoid m, Traversable t) => (a -> m) -> t a -> m
 foldMap' step = getConst . traverse (Const . step)
                 -- where step :: a -> m
                 --       Const . step :: a -> Const m b
