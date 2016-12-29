@@ -3,7 +3,10 @@ module TasteLenses where
 
 import Control.Lens
 
-{-
+
+-- *** A Taste of Lenses *** --
+
+{- conventional stuff
 data Point = Point { posX :: Double,
                      posY :: Double
                    } deriving (Show)
@@ -16,13 +19,15 @@ mkPoint (x, y) = Point x y
 mkSeg st ed = Segment (mkPoint st) (mkPoint ed)
 -}
 
+
 data Point = Point
   { _posX :: Double, _posY :: Double
   } deriving (Show)
 makeLenses ''Point
--- * Generated lenses
--- posX :: Functor f => (Double -> f Double) -> Point -> f Point
--- posY :: Functor f => (Double -> f Double) -> Point -> f Point
+{- Generated lenses
+posX :: Functor f => (Double -> f Double) -> Point -> f Point
+posY :: Functor f => (Double -> f Double) -> Point -> f Point
+-}
 
 
 data Segment = Segment
@@ -30,9 +35,10 @@ data Segment = Segment
   , _segEnd :: Point
   } deriving (Show)
 makeLenses ''Segment
--- * Gen lenses
--- segStart :: Functor f => (Point -> f Point) -> Segment -> f Segment
--- segEnd   :: Functor f => (Point -> f Point) -> Segment -> f Segment
+{-
+segStart :: Functor f => (Point -> f Point) -> Segment -> f Segment
+segEnd   :: Functor f => (Point -> f Point) -> Segment -> f Segment
+-}
 
 {- * Lens utils
 
@@ -59,6 +65,18 @@ view segEnd
 mkPoint (x, y) = Point x y
 
 mkSeg st ed = Segment (mkPoint st) (mkPoint ed)
+
+  
+
+-- *** The Scenic Route to Lenses *** --
+
+{- * Warmup with Traversals
+Traverse :: (Applicative f, Traversable t) => (a -> f b) -> (t a -> f (t b))
+-}
+
+myFMap f = runIdentity . traverse (Identity . f)
+myFoldMap f = getConst . traverse (Const . f)
+
 
 -- A special setter rather than ASetter
 pointCoords :: Applicative f => (Double -> f Double) -> Point -> f Point
@@ -116,8 +134,5 @@ myMapped :: (Functor f) => (a -> Identity b) -> f a -> Identity (f b)
 -- set  :: ASetter s t a b -> b -> s -> t
 -- over :: ASetter s t a b -> (a -> b) -> s -> t
 -- over :: ASetter (f a) (Identity (f b)) a (Identity b)
--- 
--- set fmap :: b -> Identity a -> Identity b
--- set fmap :: (f b) -> Identity b -> Identity (f b)
-myMapped g fa = Identity $ fmap (runIdentity . g) fa
+myMapped g = Identity . fmap (runIdentity . g)
 

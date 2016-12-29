@@ -1,5 +1,8 @@
 {-# LANGUAGE GADTs, RankNTypes, KindSignatures #-}
 
+{- * Constructors can specialize data!
+-}
+
 data Expr a where
   I :: Int -> Expr Int
   B :: Bool -> Expr Bool
@@ -14,9 +17,6 @@ eval (B b) = b
 eval (Add e1 e2) = eval e1 + eval e2
 eval (Mul e1 e2) = eval e1 * eval e2
 eval (Eq  e1 e2) = eval e1 == eval e2
-
-main :: IO ()
-main = return ()
 
 
 data RoseTree a
@@ -47,10 +47,12 @@ data SafeList a eOrNe where
 safeHead :: SafeList a NonEmpty -> a
 safeHead (Cons x _) = x
 
+-- Write reporting by type-checking!
 -- r1 = safeHead (Cons "hi" Nil)
 -- r2 = safeHead Nil               -- • Couldn't match type ‘Empty’ with ‘NonEmpty’
 
--- A trouble
+-- But trouble - this function cannot be defined!
+-- -- Cannot return a consistent type...
 -- silly :: Bool -> SafeList a ?
 -- silly False = Nil
 -- silly True = Cons () Nil
@@ -64,19 +66,19 @@ data Safe
 
 data MarkedList :: * -> * -> * where
   MNil          :: MarkedList t NotSafe
-  -- MCons must be safe?
-  -- MCons         :: a -> MarkedList a m1 -> MarkedList a Safe
   MCons         :: a -> MarkedList a m1 -> MarkedList a m2
 
 mSafeHead :: MarkedList a Safe -> a
 mSafeHead (MCons x _) = x
 
--- mSafeTail :: MarkedList a Safe -> MarkedList a ???
--- mSafeTail (MCons _ xs) = xs
-
+-- Definable... but 'NotSafe' should not be used for typing the second branch.
 mSilly :: Bool -> MarkedList () NotSafe
 mSilly False = MNil
 mSilly True = MCons () MNil
+
+-- More trouble... Tail function not definable!
+-- mSafeTail :: MarkedList a Safe -> MarkedList a ???
+-- mSafeTail (MCons _ xs) = xs
 
 
 {- * To support safeTail! -}
@@ -84,7 +86,7 @@ data RecSafe b
 
 data MSList :: * -> * -> * where
   MSNil     :: MSList t NotSafe
-  MSCons    :: a -> MSList a b -> MSList a (RecSafe b)
+  MSCons    :: a -> MSList a b -> MSList a (RecSafe b) -- Huge trick! Think of Free-Monad!
 
 msSafeHead :: MSList a (RecSafe b) -> a
 msSafeHead (MSCons a _) = a
@@ -93,7 +95,7 @@ msSafeTail :: MSList a (RecSafe b) -> (MSList a b)
 msSafeTail (MSCons _ as) = as
 
 
-{- * Type with values - a list with length value! -}
+{- * Type with values - a list with length value at type-level! -}
 data Zero
 data Succ n
 
@@ -107,3 +109,6 @@ lenSafeHead (LenCons a _) = a
 lenSafeTail :: LenList a (Succ n) -> LenList a n
 lenSafeTail (LenCons _ as) = as
 
+
+main :: IO ()
+main = return ()
