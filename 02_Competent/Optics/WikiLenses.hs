@@ -3,6 +3,7 @@ module TasteLenses where
 
 -- import Data.Functor.Contravariant
 import Control.Lens
+import Control.Monad.State
 
 
 -- *** A Taste of Lenses *** --
@@ -205,11 +206,93 @@ type Getter' s a =
 --   :: Control.Monad.Reader.Class.MonadReader s m =>
 --      Getting a s a -> m a
 
+-- hasn't :: Getting All s a -> s -> Bool
 
 
--- ***  *** --
+-- *** Lenses at last *** --
+
+-- type Traversal s t a b =
+--   forall f. Applicative f => (a -> f b) -> s -> f t
+-- 
+-- type Lens s t a b =
+--   forall f. Functor f => (a -> f b) -> s -> f t
+--
+-- -- Relaxing (Applicative) of Traversal to (Functor) getting Lens!
+-- 
+-- 
+
+-- _1 (\x -> [0..x]) (4, 1)
+-- set _1 7 (4, 1)
+-- over _1 length ("orange", 1)
+-- toListOf _1 (4, 1)
+-- view _1 (4, 1)
+
+-- * Composition
+
+
+-- * Operators
+
+
+-- * State manipulation
+stateExample :: State Segment ()
+stateExample = do
+  segStart .= mkPoint (0, 0)
+  zoom segEnd $ do
+    posX += 1
+    posY *= 2
+    pointCoords %= negate
+
+-- * Isos
+
+unmkPoint :: Point -> (Double, Double)
+unmkPoint (Point x y) = (x, y)
+
+-- iso :: (s -> a) -> (b -> t) -> Iso s t a b
+pointPair :: Iso' Point (Double, Double)
+pointPair = iso unmkPoint mkPoint
+
+-- view pointPair testPoint
+
+
+-- * Prisms
+{-
+Iso         --> one tar, invertible
+Lens        --> one tar, not invertible
+Traversable --> many tar, not invertible
+-}
+
+-- Prism is a Traversal
+-- set _Just 5 (Just "orange")
+
+-- Prism is not a Getter
+
+
+-- Ex 2. Implement (lens)
+myLens :: Functor f => (s -> a) -> (s -> b -> t) -> (a -> f b) -> s -> f t
+myLens getter setter k s = setter s <$> k (getter s)
+  -- where
+  --   a --> attr
+  --   b --> attrNew
+  --   s --> struct
+  --   t --> structNew
+  --   
+  --   getter :: s -> a
+  --   setter :: s -> b -> t
+  --   k      :: a -> f b
+  --   s      :: s
+  -- 
+  --   setter s :: b -> t
+  --   getter s :: a
+  -- 
+  --   (setter s <$>)          :: f (b -> t)
+  --   k (getter s)            :: f b
+  --   (setter s <$> getter s) :: f (b -> t) <$> f b == f t
+
+
+-- Feeling failed and dizzy with interveaning concepts...
 
 
 main :: IO ()
-main = putStrLn $ show $ toListOf extremityCoords (mkSeg (0, 1) (2, 3))
+main = putStrLn $ show $
+  execState stateExample (mkSeg (1,2) (5,3))
 

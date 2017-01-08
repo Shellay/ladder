@@ -78,6 +78,19 @@ xss = traverse (\x -> [0..x]) [0..3]
 -- == (:) <$> (f 0) <*> ((:) <$> (f 1) <*> (2:3:[]))
 -- == (:) <$> [0..0] <*> ((:) <$> [0..1] <*> (... ( (:) <$> [0..3] <*> pure [])))
 
+acons :: [a] -> [[a]] -> [[a]]
+a `acons` as = (:) <$> a <*> as
+
+infixr 8 <*:>
+(<*:>) = acons
+
+-- xss == xss'
+xss' = [0] <*:> [0..1] <*:> [0..2] <*:> [0..3] <*:> [[]]
+
+-- In terms of (foldr) and (fmap):
+fomap = foldr acons [[]] . map (\x -> [0..x])
+  -- where (acons) is the binary fold-node
+
 
 -- * Ex. Matrix transposition
 
@@ -267,3 +280,4 @@ foldMap' step = getConst . traverse (Const . step)
                 --       Const . step :: a -> Const m b
                 --       traverse :: (a -> Const m b) -> t a -> Const m (t b)
 
+main = return ()

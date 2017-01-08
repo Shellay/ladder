@@ -1,0 +1,1195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>B-W-LectureNotes</title>
+<!-- 2017-01-02 Mon 12:17 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="shellay" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">B-W-LectureNotes</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Preliminaries</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Graphs</a></li>
+<li><a href="#sec-1-2">1.2. Homomorphism of graphs</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. Categories</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Basic definitions</a></li>
+<li><a href="#sec-2-2">2.2. FPL as categories</a></li>
+<li><a href="#sec-2-3">2.3. Mathematical structures as categories</a></li>
+<li><a href="#sec-2-4">2.4. Categories of sets with structure</a></li>
+<li><a href="#sec-2-5">2.5. Categories of algebraic structures</a></li>
+<li><a href="#sec-2-6">2.6. Constructions on categories</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Properties of objects and arrows</a></li>
+<li><a href="#sec-4">4. Functors</a></li>
+<li><a href="#sec-5">5. Diagrams and naturality</a></li>
+<li><a href="#sec-6">6. Products and sums</a></li>
+<li><a href="#sec-7">7. Cartesian closed categories</a></li>
+<li><a href="#sec-8">8. Limits and colimits</a></li>
+<li><a href="#sec-9">9. Adjoints</a></li>
+<li><a href="#sec-10">10. Triples</a></li>
+<li><a href="#sec-11">11. Toposes</a></li>
+<li><a href="#sec-12">12. Categories with monoidal structure</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Preliminaries</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Graphs</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Roughly: "A category: a graph in which paths can be composed."
+</p>
+
+<ol class="org-ol">
+<li>Def &amp; Note
+<ul class="org-ul">
+<li>graph
+</li>
+<li>nodes/objects
+</li>
+<li id="arrows">(source/domain, target/codomain)
+<ul class="org-ul">
+<li>`f : a -&gt; b`
+</li>
+<li>endoarrow/endomorphism
+</li>
+</ul>
+</li>
+<li id="(G0, G1)">(G.nodes, G.arrows)
+</li>
+<li>endoarrow/endomorphism
+</li>
+</ul>
+</li>
+
+<li>e.g.
+<ul class="org-ul">
+<li>G = (G0, G1) <code>= (nodes={1,2}, arrows={a,b,c})
+	where src(a) =</code> tar(a) <code>= src(b) =</code> tar(c) <code>= 1
+	      tar(b) =</code> src(c) <code>= 2
+	=</code> ({1,2}, {1-&gt;1, 1-&gt;2, 2-&gt;1})
+</li>
+</ul>
+</li>
+
+<li>e.g.
+<ul class="org-ul">
+<li><b>large</b> graph
+</li>
+<li>G := (&lt;all-sets&gt;, &lt;all-functions&gt;) == (S, F)
+where {f.domain in S &amp;&amp; f.codomain in S | f in F}
+<ul class="org-ul">
+<li>Russell's paradox: nodes and arrows form <b>NO</b> sets
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>e.g.
+<ul class="org-ul">
+<li>relation-on-set as graph
+</li>
+<li>A = {1,2,3}, B = {2,3,4}, α = {(1,2),(2,2),(2,3),(1,4)} : Relation
+</li>
+<li><b>simple</b> graph G(N, A)
+<ul class="org-ul">
+<li>{! (src(a1) <code>= src(a2) &amp;&amp; tar(a1) =</code> tar(a2)) | a1, a2 in A}
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>e.g. data structure
+<ul class="org-ul">
+<li>N: natural number as graph
+<ul class="org-ul">
+<li>G({"1",n}, {succ=(n,n), 0=("1",n)})
+where "1" denotes <b>singleton set</b>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Homomorphism of graphs</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Homom of graphs preserve abstract shape of the graph
+</p>
+
+<ol class="org-ol">
+<li>Def
+<ul class="org-ul">
+<li>homomorphism (φ : G -&gt; H) is a <b>pair of functions</b>
+(φ₀ : G₀ -&gt; H₀,  φ₁ : G₁ -&gt; H₁)
+and   if arrow (m -&gt; n) in G₁, then arrow (φ₀(m) -&gt; φ₀(n)) in H₁
+      where u = (m -&gt; n)
+            φ(u) = (φ₀(m) -&gt; φ₀(n))
+</li>
+<li>ReDef
+with (src[G] : G₁ -&gt; G₀), (tar[G] : G₁ -&gt; G₀),
+(φ₀ : G₀ -&gt; H₀,  φ₁ : G₁ -&gt; H₁) is homom iff
+<ul class="org-ul">
+<li>src[H] ∘ φ₁ <code>= φₒ ∘ src[G] &amp;&amp;
+	  tar[H] ∘ φ₁ =</code> φₒ ∘ tar[G]
+where src[H] : H₁ -&gt; H₀
+      φ₁     : G₁ -&gt; H₁
+      src[H] ∘ φ₁ : G₁ -&gt; H₀
+and
+      src[H](φ₁(u)) <code>= φ₀(m)
+	  φ₀(src[G](u)) =</code> φ₀(m)
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>Notation (a : B -&gt; C)
+<ul class="org-ul">
+<li>overloading
+<ul class="org-ul">
+<li>set-theo func
+</li>
+<li>graph homom
+</li>
+<li>arrow in a graph
+</li>
+</ul>
+</li>
+<li><b>Arrow in a graph</b> per se!
+<ul class="org-ul">
+<li>(function : set -&gt; set) within G(sets, functions)
+</li>
+<li>(homo : graph -&gt; graph) within G(graphs, homos)
+</li>
+<li>(arrow : node -&gt; node)  within G(nodes, arrows)
+</li>
+</ul>
+</li>
+<li>(φ : G -&gt; H) == (φ₀ : G₀ -&gt; H₀, φ₁ : G₁ -&gt; H₁)
+e.g.
+<ul class="org-ul">
+<li>h = φ(g) where φ means φ
+</li>
+<li>μ = φ(m) where φ means φ₀
+</li>
+<li>ζ = φ(u) where φ means φ₁
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>Def
+<b>identity homomorphism</b> (<i>idG</i> : <i>G</i> -&gt; <i>G</i>)
+where (<i>idG</i> ₀ = id : G₀ -&gt; G₀,
+       <i>idG</i> ₁ = id : G₁ -&gt; G₁)
+      where (id : W -&gt; W) is the identity function on set W
+
+<p>
+i.e. { id(a) in <i>idG</i> ₀ | a in G₀ } &amp;&amp;
+     { (id(a) -&gt; id(b)) in <i>idG</i> ₁ | (a -&gt; b) in G₁}
+</p>
+</li>
+
+<li>e.g.
+Given
+G({1,2,3,4}, {(1,4),(1,2),(2,2),(2,3)}),
+H({S,F,Q}, {(S,Q),(S,F),(F,F),(F,F)});
+<ul class="org-ul">
+<li>there is
+(φ : G -&gt; H) = (φ₀, φ₁) where
+  φ₀ = {1-&gt;S, 2-&gt;F, 3-&gt;F, 4-&gt;Q}
+  φ₁ = {(1,4)-&gt;(S,Q), (1,2)-&gt;(S,F), (2,2)-&gt;(F,F), (2,3)-&gt;(F,F)}
+and there are more possibilities
+</li>
+</ul>
+</li>
+
+<li>e.g.
+if loop (u = n -&gt; n) in H₁,
+then for <b>any</b> G, there is homom
+(φ : G -&gt; H) where
+  φ₀ = {k-&gt;n for k in G₀}
+  φ₁ = {z-&gt;u for z in G₁}
+</li>
+
+<li>Notation
+φ₁(source)(f)
+where source     :: node
+      φ₁(source) :: arrow -&gt; arrow
+      f          :: arrow
+      φ₁(source)(f) :: arrow
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Categories</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Category: graph with rule for composing arrows to give another arrow
+</p>
+</div>
+
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Basic definitions</h3>
+<div class="outline-text-3" id="text-2-1">
+<ol class="org-ol">
+<li>Def <b>path</b>
+<ul class="org-ul">
+<li>In G, k &gt; 0, path[x,y,k] = seq(f₁,f₂,&#x2026;,fₖ) where
+<ul class="org-ul">
+<li>src[fₖ] = x
+</li>
+<li>tar[fᵢ] = src[fᵢ₋₁] for i in [2..k]
+</li>
+<li>tar[f₁] = y
+</li>
+</ul>
+</li>
+<li>empty path path[x,x,0] = ()
+</li>
+<li>for f in G₁, (f) == path[_,_,1]
+</li>
+</ul>
+</li>
+
+<li>Def Gₖ
+Gₖ = {path[_,_,k] for path in <i>G</i>}
+<ul class="org-ul">
+<li>Spec
+G₀ is G.nodes
+G₁ is G.arrows
+</li>
+<li>Def category G₂
+G₂ = {(g,f) | f, g in G₁, tar(f) == src(g)}
+<ul class="org-ul">
+<li><b>composable pairs</b>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>Def <b>categorie</b>
+graph with two functions (rule for comp arrows to arrow)
+<i>C</i> <code>= (graph, func₂, func₁) =</code> ((C₀, C₁), c : C₂ -&gt; C₁, u : C₀ -&gt; C₁)
+<ul class="org-ul">
+<li>where
+objects <code>= C₀
+	arrows =</code> C₁
+composition <code>= c; c(g, f) =</code> g ∘ f == composite(g, f)
+  and <span class="underline">(g, f) is a composable pair</span>
+for object A in C, u(A) <code>= id[A] =</code> identity[A]
+</li>
+<li>with <b>properties</b>
+<dl class="org-dl">
+<dt> C-1 </dt><dd>src(g ∘ f) <code>= src(f) &amp;&amp; tar(g ∘ f) =</code> tar(g)
+</dd>
+<dt> C-2 </dt><dd>(h ∘ g) ∘ f == h ∘ (g ∘ f)
+</dd>
+<dt> C-3 </dt><dd>tar(id[A]) <code>= src(id[A]) =</code> A
+</dd>
+<dt> C-4 </dt><dd>if (f : A -&gt; B) then (f ∘ id[A]) <code>= (id[B] ∘ f) =</code> f
+</dd>
+</dl>
+</li>
+<li>notes
+(composition : G₁ × G₁ -&gt; G₁)
+</li>
+</ul>
+</li>
+
+<li>Termino
+<ul class="org-ul">
+<li>syno
+<ul class="org-ul">
+<li>morphism &lt;=&gt; arrow
+</li>
+<li>domain   &lt;=&gt; source
+</li>
+<li>codomain &lt;=&gt; target
+</li>
+</ul>
+</li>
+<li>1-to-1 correspondence:
+(object A) &lt;=&gt; id[A]
+</li>
+</ul>
+</li>
+
+<li>Def
+<b>small</b> :- objects and arrows constitute <span class="underline">sets</span>
+</li>
+
+<li>Def
+For objects A, B in C₀ of <i>C</i>, arrow u in C₁,
+Hom(A,B) = {u | u in C₁, src(u) <code>= A &amp;&amp; tar(u) =</code> B}
+For (A,B,C), composition
+Hom(B,C) × Hom(A,B) -&gt; Hom(A,C)
+<ul class="org-ul">
+<li><b>hom set</b> of (A,B), aka. <i>C</i> (A,B), <i>C</i> (AB)
+</li>
+</ul>
+</li>
+
+<li>Def
+<b>locally small</b> of <i>C</i> is when
+{Hom(A,B) is a <span class="underline">set</span> | A, B in <i>C</i>}
+</li>
+
+<li>Def
+for path=(f₁, &#x2026; , fₙ) in Cat, n &gt; 2:
+(f₁ ∘ &#x2026; ∘ fₙ) = (f₁ ∘ &#x2026; ∘ fₙ₋₁) ∘ fₙ
+</li>
+
+<li>Prop <b>gen accociativity law</b>
+for path=(f₁, &#x2026; , fₙ) in Cat, 1 &lt; k &lt; n,
+(f₁ ∘ &#x2026; ∘ fₖ) ∘ (fₖ₊₁ ∘ &#x2026; ∘ fₙ) == f₁ ∘ &#x2026; ∘ fₙ
+</li>
+
+<li>Def
+little cat
+<ul class="org-ul">
+<li>smallest: no objects, no arrows
+</li>
+<li>next: one object, one arrow : (({A}, {f=A-&gt;A}), {c}, {?}) : <b>1</b>
+</li>
+<li>op-plus:
+<b>1</b> + <b>1</b> <code>= ({A,B}, {A-&gt;A, B-&gt;B}, {c}, {?})
+	 *2*       =</code> ({C,D}, {C-&gt;C, D-&gt;D, C-&gt;D}, {c}, {?})
+</li>
+</ul>
+</li>
+
+<li>Def
+Cat of sets: ((sets, functions), compositions) with (id[S] : S -&gt; S)
+<ul class="org-ul">
+<li>composition assoc
+<ul class="org-ul">
+<li>(f ∘ id[S] = f &amp;&amp; id[S] ∘ g = g)
+where src[f] = S &amp;&amp; tar[g] = S
+</li>
+</ul>
+</li>
+<li>Cat of sets: <b>Set</b>
+</li>
+</ul>
+</li>
+
+<li>Def
+Cat of finite sets: <b>Fin</b>,
+<ul class="org-ul">
+<li>objects are finite sets
+</li>
+<li>arrows are funcs between finite sets
+</li>
+</ul>
+</li>
+
+<li>Def
+(<b>Partial function</b> : S × T, S₀ -&gt; T)
+where S₀ is subset of S
+
+<ul class="org-ul">
+<li>Cat Pfn ((sets, part-fns), c₁₂, c₀₁)
+where (f : S -&gt; T, f on S₀ ≤ S), f in part-fns
+      (g : T -&gt; V, g on T₀ ≤ T), g in part-fns
+      (g ∘ f : S -&gt; V, on {x in S₀ | f(x) in T₀}) and (g ∘ f)(x) = g(f(x))
+</li>
+</ul>
+</li>
+
+<li>Def relation
+α : rel(S, T)
+β : rel(T, U)
+(β ∘ α) : rel(S, U)
+where x in S &amp;&amp; z in U &amp;&amp; (x,z) in (β ∘ α) iff
+      exists y that (x,y) in α &amp;&amp; (y,z) in β
+<ul class="org-ul">
+<li>Cat <b>Rel</b> ((sets, rels), c₁₂, c₀₁)
+<ul class="org-ul">
+<li>diag-rel Δ<sub>S</sub> == {(x,x) | x in A}
+"diag" as if from matrix entry [i,i]
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> FPL as categories</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+FPs, deduction systems
+</p>
+
+<ol class="org-ol">
+<li>FPL
+<ul class="org-ul">
+<li>primitive types, operations, ctors
+<ul class="org-ul">
+<li>produce more
+</li>
+</ul>
+</li>
+<li>pure
+<ul class="org-ul">
+<li>no var, no assg
+</li>
+<li>writing by constructing
+</li>
+<li>running by applying op to consts
+</li>
+</ul>
+</li>
+<li>(no var) vs (rebindable)
+</li>
+</ul>
+</li>
+
+<li>Cat corrsp FP
+<ul class="org-ul">
+<li>with properties
+<dl class="org-dl">
+<dt> FPL-1 </dt><dd>prim data types
+</dd>
+<dt> FPL-2 </dt><dd>const of each type
+</dd>
+<dt> FPL-3 </dt><dd>ops, i.e. func betw types
+</dd>
+<dt> FPL-4 </dt><dd>ctors
+</dd>
+</dl>
+</li>
+</ul>
+</li>
+
+<li>Cat <i>C/(/L</i>) of FP <i>L</i>
+<ul class="org-ul">
+<li>with crsp <span class="underline">properties</span>
+
+<dl class="org-dl">
+<dt> A-1 </dt><dd>"do-nothing op", i.e. id[A]
+</dd>
+<dt> A-2 </dt><dd>additional type <b>1</b>
+                 each <span class="underline">const</span> of type A (c : A) as <span class="underline">arrow</span> (c : <b>1</b> -&gt; A)
+</dd>
+<dt> A-3 </dt><dd>comp ctor
+(f : A -&gt; B) and (g : B -&gt; C)
+(f;g : A -&gt; C)
+also
+f;idB <code>= idA;f =</code> f
+</dd>
+</dl>
+</li>
+</ul>
+</li>
+
+<li>C(L)
+<ul class="org-ul">
+<li>L with cat struct
+<dl class="org-dl">
+<dt> FPC-1 </dt><dd>C(L).objects == L.types
+</dd>
+<dt> FPC-2 </dt><dd>C(L).arrows == L.ops
+</dd>
+<dt> FPC-3 </dt><dd>u.src <code>= op.inp.type &amp;&amp; u.tar =</code> op.out.type
+(u  : S -&gt; T) in C₁
+(op : I -&gt; O) in L
+</dd>
+<dt> FPC-4 </dt><dd>C(L).comp == L.ctor
+</dd>
+<dt> FPC-5 </dt><dd>id
+</dd>
+</dl>
+</li>
+</ul>
+</li>
+
+<li>e.g. L with types NAT, BOOLEAN, CHAR
+where in cat-style
+<ul class="org-ul">
+<li>NAT with
+<ul class="org-ul">
+<li>const-op (0 : <b>1</b> -&gt; NAT)
+</li>
+<li>op       (succ : NAT -&gt; NAT)
+</li>
+</ul>
+</li>
+<li>BOOLEAN with
+<ul class="org-ul">
+<li>const-op (true : <b>1</b> -&gt; BOOLEAN)
+(false : <b>1</b> -&gt; BOOLEAN)
+</li>
+<li>op       (¬ : BOOLEAN -&gt; BOOLEAN)
+where ¬ ∘ true = false
+      ¬ ∘ false = true
+</li>
+</ul>
+</li>
+<li>CHAR with
+<ul class="org-ul">
+<li>const-op (c : <b>1</b> -&gt; CHAR)
+</li>
+</ul>
+</li>
+<li>type conv
+<ul class="org-ul">
+<li>ops (ord : CHAR -&gt; NAT)
+    (chr : NAT -&gt; CHAR)
+where (chr ∘ ord) = id<sub>CHAR</sub>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>e.g.cont
+C(L).objects <code>= {NAT, BOOLEAN, CHAR, *1*}
+      C(L).arrows =</code> all-programs
+</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Mathematical structures as categories</h3>
+<div class="outline-text-3" id="text-2-3">
+<ol class="org-ol">
+<li>Def
+<b>preordered set</b> (S,α)
+<ul class="org-ul">
+<li>where
+<dl class="org-dl">
+<dt> bin rel α on S </dt><dd>&alpha; subsets (S &times; S)
+where xαy for (x,y) in α
+</dd>
+<dt> reflexive  </dt><dd>xαx for x in S
+</dd>
+<dt> transitive </dt><dd>xαy &amp;&amp; yαz =&gt; xαz
+r(x,y) &amp;&amp; r(y,z) <code>=&gt;&gt; r(x,z)
+			r(y,z) ∘ r(x,y) $ x =</code> 
+</dd>
+</dl>
+</li>
+<li>as C(S,α)
+<dl class="org-dl">
+<dt> CO-1 </dt><dd>C(S,α).objects = S.elements
+</dd>
+<dt> CO-2 </dt><dd>for xαy
+C(S,α).arrow[x,y] <code>= (y,x) =</code> xαy
+with (y,x) as (y &lt;- x) since composition is right-to-left
+</dd>
+<dt> CO-3 </dt><dd>for y, if no x that xαy
+no (y,x) in C(S,α)
+</dd>
+<dt> (no term) </dt><dd>with
+<ul class="org-ul">
+<li>reflexivity:  (x,x) in C(S,α)
+</li>
+<li>transitivity: (z,y) ∘ (y,x) == (z,x)
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</li>
+
+<li>e.g
+C(S,α) where S = {C,D}, α = {&lt;C,C&gt;, &lt;C,D&gt;, &lt;D,D&gt;}
+which is <b>2</b>
+</li>
+
+<li>Def
+<dl class="org-dl">
+<dt> ordered set </dt><dd>(S,α) where antisymm(α), i.e. (xαy &amp;&amp; yαx =&gt; x = y)
+</dd>
+<dt> poset </dt><dd>part-ord-set
+e.g. (<b>R</b>, ≤)
+e.g. (Power(S), ⊆)
+</dd>
+<dt> (no term) </dt><dd>useful! <span class="underline">cat as ord-set</span>
+</dd>
+</dl>
+</li>
+
+<li>Def
+<b>semigroup</b> (S, m : S × S -&gt; S) where S is its <b>underlying set</b>
+<ul class="org-ul">
+<li>non-comm "multiply"
+for s, t in S: m(s,t) == s*t
+where maybe s*t ≠ t*s
+</li>
+<li><b>commutative semigroup</b> where s*t == t*s
+</li>
+</ul>
+</li>
+
+<li>Def
+<b>powers</b> where
+<ul class="org-ul">
+<li>s¹ <code>= s &amp;&amp; s^{k} =</code> s*s<sup>k-1</sup> for k &gt; 0
+</li>
+<li>s<sup>k</sup>s<sup>n</sup> == s<sup>k+n</sup>
+</li>
+<li>(s<sup>k</sup>)<sup>n</sup> == s<sup>kn</sup>
+</li>
+<li>if commut, (st)<sup>k</sup> <code>= stst...st =</code> s<sup>k</sup>t<sup>k</sup>
+</li>
+</ul>
+</li>
+
+<li>Def
+<b>empty semigroup</b> (Φ, ε : Φ × Φ -&gt; Φ)
+where ε is the <b>empty function</b>
+</li>
+
+<li>Def
+for semigroup (S,m)
+<b>identity element</b> e where {s*e <code>= e*s =</code> s | s in S}
+<ul class="org-ul">
+<li><span class="underline">at most one such e</span>
+        since for e₁, e₂: e₁*e₂ <code>= e₂*e₁ =</code> e₁ == e₂
+</li>
+</ul>
+</li>
+
+<li>Def
+<b>monoid</b> is semigroup (S, m, e) with <span class="underline">one id-elem</span> e
+<ul class="org-ul">
+<li>is commut if m is commut
+</li>
+<li>non-empty
+</li>
+</ul>
+</li>
+
+<li>e.g.
+<ul class="org-ul">
+<li>(Nat<sup>+</sup>, +) &#x2013;&gt; semigroup, not monoid
+</li>
+<li>(Nat, +, 0) &#x2013;&gt; monoid
+</li>
+<li><b>Kleene closure</b> (A*) where A is a set of strings
+<ul class="org-ul">
+<li>'abcd' in A* == {a,b,c,d}*
+</li>
+<li>'' in A*
+</li>
+<li>with op-concat, <b>free monoid</b> F(A) = (A*, ++)
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>Def
+<b>submonoid</b> of monoid M is (S subsets M, m) where
+<ul class="org-ul">
+<li>id-elem(M) in S
+</li>
+<li>for s, t in S: s*t in S
+(S is <b>closed</b> under m)
+</li>
+</ul>
+</li>
+
+<li>e.g.
+<ul class="org-ul">
+<li>Nat =&gt; submonoid (Nat, plus, e=0)
+</li>
+<li>Nat⁺ =&gt; submonoid (Nat, mult, e=1)
+</li>
+<li>{0} forms monoid ({0}, mult, 0)
+</li>
+<li>{0} forms no submonoid of (Nat on mult), i.e. (Nat, mult, e=1)
+since e=1 not in {0}
+</li>
+</ul>
+</li>
+
+<li>Corresp <b>monoid as cat</b>
+       M =&gt; C(M)
+<dl class="org-dl">
+<dt> CM-1 </dt><dd>C(M) = {*} where * = M.underlyingSet
+</dd>
+<dt> CM-2 </dt><dd>C(M).arrows = {(* -&gt; *)}
+</dd>
+<dt> CM-3 </dt><dd>comp == M.op
+</dd>
+</dl>
+</li>
+
+<li>Remark
+alt def
+<dl class="org-dl">
+<dt> monoid </dt><dd>cat with one obj
+((nodes={p}, arrows={p-&gt;p}), comp, )
+</dd>
+<dt> preordered set </dt><dd>cat with each hom-set empty or singleton
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Categories of sets with structure</h3>
+<div class="outline-text-3" id="text-2-4">
+<ol class="org-ol">
+<li>Appl
+<b>category of graph</b> - <b>GRF</b>
+(objects=graphs, arrows=homomorphisms, composite, identity)
+<ul class="org-ul">
+<li>composite
+let (φ : <i>G</i> -&gt; <i>H</i>), (ψ : <i>H</i> -&gt; <i>K</i>)
+    (u : m -&gt; n) in <i>G</i>
+    (φ₁(u) : φ₀(m) -&gt; φ₀(n)) in <i>H</i>
+    (ψ₁(φ₁(u)) : ψ₀φ₀(m) -&gt; ψ₀φ₀(n)) in <i>K</i>
+    i.e. (ψ ∘ φ) is a graph homom
+</li>
+<li>identity
+with id-homoms <i>idG</i> , <i>idH</i> and <i>idK</i>
+</li>
+</ul>
+</li>
+
+<li>Appl
+<b>category of poset</b>
+let (S, α) and (T, β) be posets,
+with monotone(f : S -&gt; T) iff (xαy in S ==&gt; f(x)βf(y) in T)
+(objects=posets, arrows=monotone-functions, composite, identity)
+</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Categories of algebraic structures</h3>
+<div class="outline-text-3" id="text-2-5">
+<ol class="org-ol">
+<li>Def
+
+<p>
+<b>semigroup homomorphism</b>
+let (S, †), (T, ‡) be semigroups
+    homom(h : S -&gt; T)
+    if <span class="underline">{h(ss') == h(s)h(s') | s, s' in S}</span>
+    meaning h₀ : {s -&gt; h(s) , s' -&gt; h(s') , &#x2026;}
+            h₁ : {((s,s') -&gt; (h(s),h(s'))) , &#x2026;}
+</p>
+
+<p>
+<b>monoid homomorphism</b>
+let (S, †, ε), (T, ‡, ω) be monoids
+    where {h(ss') <code>= h(s)h(s') | s, s' in S}
+	        h(ε) =</code> ω
+</p>
+</li>
+
+<li>e.g.
+<ul class="org-ul">
+<li>given monoid M(U, †, e), submonoid S(V, †, e)
+with incl-f(h : V -&gt; U) being homom
+<p>
+since {h(vv') <code>= h(v)h(v') =</code> vv' | v, v' in V} and
+      {h(e) == e}
+</p>
+</li>
+<li>given M(Int, mult, 1), N({0,1}, mult, 1)
+with homo(h : Int -&gt; {0,1}) where h(even-int) <code>= 0 &amp;&amp; h(odd-int) =</code> 1
+     since {h(od * od) <code>= h(od) * h(od) =</code> 1,
+            h(ev * od) <code>= h(ev) * h(od) =</code> 0,
+            h(ev * ev) <code>= h(ev) * h(ev) =</code> 0} and
+           {h(1) == 1}
+</li>
+<li>id-func is homom ({x -&gt; x}, {(x -&gt; x) -&gt; (id(x) -&gt; id(x))})
+where id₀ = {x-&gt;x}, id₁ = {(x-&gt;x)-&gt;(x,x)}
+</li>
+
+<li>Def
+<b>Sem</b> is cat of semigroups and semigroup-homoms
+<b>Mon</b> is cat of monoids and monoid-homoms
+</li>
+</ul>
+</li>
+
+<li>e.g.
+<ul class="org-ul">
+<li>let S = sgp({s}, mult); N⁺ = sgp(Z⁺, add)
+there is sgp-homom (p : N⁺ -&gt; S) where p(k) = sᵏ
+         where {p(k+n) <code>= p(k)p(n) =</code> s<sup>k</sup>s<sup>n</sup> | k, n in Z⁺} 
+         using <span class="underline">DEF(sgp-homom)</span>
+</li>
+</ul>
+</li>
+
+<li>e.g. semigroup-homom between monoids 
+may <span class="underline">not</span> be monoid-homom
+<ul class="org-ul">
+<li>let E = monoid({e}, mult, ε=e)
+Z = monoid(Int, mult, ω=1)
+h = (h : {e} -&gt; Int, h(e) = 0)
+    having {h(ee) <code>= h(e)h(e) =</code> 0 | e in E}
+    thus h is semig-homom
+but h(ε) <code>= 0 !</code> 1 == ω
+    thus h is not monoid-homom
+</li>
+</ul>
+</li>
+
+<li>Def
+<b>inverse</b> of homom (exist?)
+<ul class="org-ul">
+<li>let (f : S -&gt; T) be bij sgp-homom
+{f(ss') == f(s)f(s') | s,s' in S} with DEF(sgp-homom) 
+let (g : T -&gt; S) = f<sup>-1</sup>
+needing {g(t)g(t') <code>= g(tt') | t,t' in T}
+	        &lt;=</code> {f(g(t)g(t')) <code>= f(g(tt')) | t,t' in T}
+		==</code> {f(ss') <code>= tt' | t,t' in T} where s = g(t), s' = g(t')
+	        ==</code> {f(g(t))f(g(t')) <code>= tt' | t,t' in T } with {f... | s,s' in S}
+		==</code> {tt' == h(t)h(t') | t,t' in T}        with h = f ∘ g
+    OK.
+</li>
+<li>true for alge-structs, not for <span class="underline">posets</span>
+</li>
+</ul>
+</li>
+
+<li>Def
+<b>semigroup isomorphism</b> 
+sgp-homom(h), bij(h), g == inv(h), sgp-homom(g)
+==&gt; sgp-isom(h), isomorphic(h, g)
+<ul class="org-ul">
+<li>e.g. 
+M({0,1,2,3}, &mu;<sub>x</sub><sub>y</sub>=(x+y)%4, 0)
+N({1,2,3,4}, &nu;<sub>x</sub><sub>y</sub>=(x*y)%5, 1)
+<ul class="org-ul">
+<li>there are two distinct isoms between M and N
+</li>
+<li>which 2???
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>Rem
+Kleene closure induces homoms
+<ul class="org-ul">
+<li>let (f : A -&gt; B)
+M<sub>A</sub>({a<sub>i</sub>}*, <del>+, ())
+M<sub>B</sub>({b<sub>j</sub>}*, +</del>, ())
+(f* : A* -&gt; B*) where f*(a<sub>1</sub>,&#x2026;,a<sub>k</sub>) = (f(a<sub>1</sub>),&#x2026;,f(a<sub>k</sub>)) and
+                      f*() = ()
+                      f*(a) = f(a)
+let a:=(a<sub>1</sub>,&#x2026;,a<sub>m</sub>), a':=(a'<sub>1</sub>,&#x2026;a'<sub>n</sub>) in A*
+f*(a)f*(a') <code>= f*(a_1,...,a_m)f*(a'_1,...a'_n)
+	                =</code> (f(a<sub>1</sub>),&#x2026;)(f(a'<sub>1</sub>),&#x2026;)
+            <code>= (f(a_1),...,f(a'_1),...)
+	                =</code> f*(a<sub>1</sub>,&#x2026;,a'<sub>1</sub>,&#x2026;)
+            == f*(aa')
+i.e. monoid-homom(f*)
+<ul class="org-ul">
+<li>let g = inv(f)
+isom(g : B -&gt; A) ==&gt; isom(g* : B* -&gt; A*)
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>Func
+Z==Int forms (Int, plus, 0) and (Int, mult, 1)
+Z<sub>k</sub>={0,1,&#x2026;,k-1} (<b>remainders</b> of k) forms
+(Z<sub>k</sub>, plus(%k), 0) and (Z<sub>k</sub>, mult(%k), 1)
+</li>
+
+<li>Def
+let k in Int &amp;&amp; k &gt; 0, n in Int,
+r == (n % k)
+  where r in Z<sub>k</sub>, n = qk +r, 0 &le; r &lt; k
+op (r +ₖ s) == (r + s) % k
+</li>
+
+<li>Propo
+(<b>Zₖ</b>, +ₖ, 0)
+</li>
+
+<li>Propo
+(f : n -&gt; n % k) is monoid-homom 
+<ul class="org-ul">
+<li>from (<b>Z</b>,+,0) to (<b>Zₖ</b>,+ₖ,0)
+since f(n₁+n₂) <code>= f(n₁)+ₖf(n₂)
+	   &lt;=</code> n₁ <code>= q₁k + r₁
+	       n₂ =</code> q₂k + r₂
+      n₁+n₂ <code>= (q₁+q₂)k + (r₁+r₂)
+	       f(n₁+n₂) =</code> (r₁+r₂)%k <code>= LHS
+	       f(n₁) =</code> r₁, f(n₂) <code>= r₂
+	       f(n₁)+ₖf(n₂) =</code> (r₁+r₂)%k with DEF(+ₖ) <code>= RHS =</code> LHS
+      OK.
+</li>
+
+<li>from (<b>Z</b>,*,0) to (<b>Zₖ</b>,*ₖ,0)
+</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-6" class="outline-3">
+<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Constructions on categories</h3>
+<div class="outline-text-3" id="text-2-6">
+<ol class="org-ol">
+<li>Def
+<b>subcategory</b> <i>D</i> of category <i>C</i>
+<ul class="org-ul">
+<li>where with (≤ meaning subset-or-equals) 
+<dl class="org-dl">
+<dt> S-1 </dt><dd>(D₀ ⊆ C₀) &amp;&amp;
+(D₁ ⊆ C₁)
+</dd>
+<dt> S-2 </dt><dd>{u<sub>D</sub>.src <code>= u_c.src &amp;&amp; u_D.tar =</code> u<sub>c</sub>.tar | u<sub>D</sub> in D₁}
+i.e. Hom<sub>D</sub>(A,B) ⊆ Hom<sub>C</sub>(A,B)
+</dd>
+<dt> S-3 </dt><dd>{id<sub>A</sub> in <i>C</i> | A in D₀}
+</dd>
+<dt> S-4 </dt><dd>{(g ∘ f) in <i>C</i> | f, g in <i>D</i>}
+</dd>
+</dl>
+</li>
+</ul>
+</li>
+
+<li>e.g.
+cat <b>Fin</b> of finite sets and all func between 'em
+subcat(<b>Fin</b>, <b>Set</b>).
+cat <b>SetPf</b> of sets and partial funcs
+subcat(<b>Set</b>, <b>SetPf</b>).
+<ul class="org-ul">
+<li>fin(A), fin(B) <code>=&gt; Hom_{*Fin*}(A,B) =</code> Hom<sub><b>Set</b></sub>(A,B)
+</li>
+<li><b>Set₀</b> == <b>SetPf₀</b>
+        however, Hom<sub><b>Set</b></sub>(A,B) ⊆ Hom<sub><b>SetPf</b></sub>(A,B)
+</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Properties of objects and arrows</h2>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Functors</h2>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Diagrams and naturality</h2>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Products and sums</h2>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Cartesian closed categories</h2>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Limits and colimits</h2>
+</div>
+
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> Adjoints</h2>
+</div>
+
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> Triples</h2>
+</div>
+
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> Toposes</h2>
+</div>
+
+<div id="outline-container-sec-12" class="outline-2">
+<h2 id="sec-12"><span class="section-number-2">12</span> Categories with monoidal structure</h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: shellay</p>
+<p class="date">Created: 2017-01-02 Mon 12:17</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
