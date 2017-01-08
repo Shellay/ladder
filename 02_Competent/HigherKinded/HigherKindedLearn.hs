@@ -1,7 +1,7 @@
 {-# LANGUAGE RankNTypes #-}
 module HigherKindedLearn where
 
-{- ** Warmup -}
+-- * Warmup * --
 
 -- Simulate type classes with Data with rank-2 type
 -- Internal implementation of type classes!
@@ -38,7 +38,7 @@ mapT = fixMT $ \mt f -> \t ->
     Lam t -> Lam (mt (mapI f) t)
 -}
 
--- * The key ideas
+-- * The key ideas * --
 
 -- ** Higher-ranked types
 

@@ -4,7 +4,7 @@ import Control.Monad.Trans.State
 -- Contents are from Haskell wikibook.
 
 
--- *** Functors made for walking *** ---
+-- * Functors made for walking * ---
 --
 -- Analogous: foldr with applicative!
 -- traverse :: (Applicative f, Traversable t) => (a -> f b) -> t a -> f (t b)
@@ -92,7 +92,7 @@ fomap = foldr acons [[]] . map (\x -> [0..x])
   -- where (acons) is the binary fold-node
 
 
--- * Ex. Matrix transposition
+-- ** Ex. Matrix transposition
 
 matTrans :: [[a]] -> [[a]]
 matTrans [] = []
@@ -110,7 +110,7 @@ transpose1 :: [[a]] -> [[a]]
 transpose1 = getZipList . traverse ZipList
 
 
--- * Ex. traverse mappend
+-- ** Ex. traverse mappend
 
 tm :: (Traversable t, Monoid b) => t b -> b -> t b
 tm = traverse mappend
@@ -154,7 +154,7 @@ instance Applicative (x ->) where
 -- to x1, x2, ... etc.
 -}
 
--- * Ex. mapAccumL :: 
+-- ** Ex. mapAccumL :: 
 -- mapAccumL :: (a -> b -> (a, c)) -> a -> [b] -> (a, [c])
 
 -- mAL f a []     = (a, [])
@@ -202,13 +202,12 @@ mapAccumL1 :: (a -> b -> (a, c)) -> a -> [b] -> (a, [c])
 mapAccumL1 step z tb = runMyState (traverse (MyState . flip step) tb) z
 
 
--- *** (Traversable) laws ***
+-- * (Traversable) laws * --
 
-{- *
+{-
 traverse :: Applicative f, Traversable t => (a -> f b) -> t a -> f (t b)
 
 traverse Identity == Identity
-
 -}
 
 newtype Compose f g a = Compose { getCompose :: f (g a) }
@@ -228,20 +227,17 @@ instance (Applicative f, Applicative g) => Applicative (Compose f g) where
   -- ((<*>) <$>) == fmap (<*>) :: Functor f => f (g (a -> b)) -> f (g a) -> f (g b)
   Compose fgh <*> Compose fga = Compose $ (<*>) <$> fgh <*> fga
 
-{- * With Compose...
-
+{- With Compose
 traverse (Compose . fmap g . f) == Compose . fmap . (traverse g) . traverse f
-
 -}
 
-{- * in terms of (sequenceA)
-
+{- in terms of (sequenceA)
 sequenceA . fmap Identity = Idendity
 -}
 
 
 
--- *** Recovering fmap and foldMap ***
+-- * Recovering fmap and foldMap * --
 
 -- fmap :: (a -> b) -> f a -> f b
 newtype Identity a = Identity { runIdentity :: a }

@@ -6,7 +6,7 @@ import Control.Lens
 import Control.Monad.State
 
 
--- *** A Taste of Lenses *** --
+-- * A Taste of Lenses * --
 
 
 {- conventional stuff
@@ -43,8 +43,8 @@ segStart :: Functor f => (Point -> f Point) -> Segment -> f Segment
 segEnd   :: Functor f => (Point -> f Point) -> Segment -> f Segment
 -}
 
-{- * Lens utils
-
+-- ** Lens utils
+{-
 set :: ASetter s t a b -> b -> s -> t
 
 over :: ASetter s t a b -> (a -> b) -> s -> t
@@ -71,10 +71,10 @@ mkSeg st ed = Segment (mkPoint st) (mkPoint ed)
 
   
 
--- *** The Scenic Route to Lenses *** --
+-- * The Scenic Route to Lenses * --
 
 
--- * Traversals
+-- ** Traversals
 
 {- Warmup with Traversals
 traverse :: (Applicative f, Traversable t) => (a -> f b) -> (t a -> f (t b))
@@ -99,7 +99,7 @@ type MyTraversal s t a b =
 extremityCoords :: Applicative f => (Double -> f Double) -> Segment -> f Segment
 extremityCoords g (Segment p1 p2) = Segment <$> pointCoords g p1 <*> pointCoords g p2
 
--- * Setters
+-- ** Setters
 
 type MySetter s t a b =
   forall f. Settable f => (a -> f b) -> (s -> f t)
@@ -107,13 +107,13 @@ type MySetter s t a b =
   -- Setter is not a special Traversal: it may only apply Applicative to some sub-structures.
   -- ! Setter is more general than Traversal.
 
-{- * ASetter definition
+{- ASetter definition
 λ> :i ASetter
 type ASetter s t a b = (a -> Identity b) -> s -> Identity t
   	-- Defined in ‘Control.Lens.Setter’
 -}
 
--- * `over` is a combinator for setters
+-- ** `over` is a combinator for setters
 -- 
 -- set :: ASetter s t a b -> b -> s -> t
 --    ::: (ASetter oldObj newObj oldVal newVal) -> newVal -> oldObj -> newObj
@@ -148,7 +148,8 @@ myMapped :: (Functor f) => (a -> Identity b) -> f a -> Identity (f b)
 myMapped g = Identity . fmap (runIdentity . g)
 
 
--- * Folds
+
+-- * Folds * --
 
 type Fold s a =
   forall f. (Contravariant f, Applicative f) => (a -> f a) -> s -> f s
@@ -193,7 +194,7 @@ preview
 -}
 
 
--- * Getters
+-- * Getters * --
 
 type Getter' s a =
   forall f. (Contravariant f, Functor f) => (a -> f a) -> s -> f s
@@ -209,7 +210,7 @@ type Getter' s a =
 -- hasn't :: Getting All s a -> s -> Bool
 
 
--- *** Lenses at last *** --
+-- * Lenses at last * --
 
 -- type Traversal s t a b =
 --   forall f. Applicative f => (a -> f b) -> s -> f t
@@ -227,13 +228,13 @@ type Getter' s a =
 -- toListOf _1 (4, 1)
 -- view _1 (4, 1)
 
--- * Composition
+-- ** Composition
 
 
--- * Operators
+-- ** Operators
 
 
--- * State manipulation
+-- ** State manipulation
 stateExample :: State Segment ()
 stateExample = do
   segStart .= mkPoint (0, 0)
@@ -242,7 +243,7 @@ stateExample = do
     posY *= 2
     pointCoords %= negate
 
--- * Isos
+-- ** Isos
 
 unmkPoint :: Point -> (Double, Double)
 unmkPoint (Point x y) = (x, y)
@@ -254,7 +255,7 @@ pointPair = iso unmkPoint mkPoint
 -- view pointPair testPoint
 
 
--- * Prisms
+-- ** Prisms
 {-
 Iso         --> one tar, invertible
 Lens        --> one tar, not invertible

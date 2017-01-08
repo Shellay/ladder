@@ -1,4 +1,4 @@
--- Expr with two types: Int and Bool
+-- * Expr with two types: Int and Bool * --
 
 {-
 data Expr = I Int
@@ -26,7 +26,7 @@ data Expr a = I Int
             | Mul (Expr a) (Expr a)
             | Eq (Expr a) (Expr a)
 
--- smart constructor
+-- * smart constructor
 add :: Expr Int -> Expr Int -> Expr Int
 add = Add
 

@@ -1,7 +1,6 @@
 {-# LANGUAGE GADTs, RankNTypes, KindSignatures #-}
 
-{- * Constructors can specialize data!
--}
+-- * Constructors can specialize data * --
 
 data Expr a where
   I :: Int -> Expr Int
@@ -35,7 +34,7 @@ data TrueGadtFoo a where
 
 
 
-{- * Safe list, where safeHead never accepts Nil at runtime. -}
+-- * Safe list, where safeHead never accepts Nil at runtime. * --
 
 data Empty
 data NonEmpty
@@ -58,7 +57,7 @@ safeHead (Cons x _) = x
 -- silly True = Cons () Nil
 
 
-{- * Allow a function to make both empty and non-empty list (non-safe) -}
+-- ** Allow a function to make both empty and non-empty list (non-safe)
 
 -- The 2 marks
 data NotSafe
@@ -81,7 +80,7 @@ mSilly True = MCons () MNil
 -- mSafeTail (MCons _ xs) = xs
 
 
-{- * To support safeTail! -}
+-- ** To support safeTail!
 data RecSafe b
 
 data MSList :: * -> * -> * where
@@ -95,7 +94,7 @@ msSafeTail :: MSList a (RecSafe b) -> (MSList a b)
 msSafeTail (MSCons _ as) = as
 
 
-{- * Type with values - a list with length value at type-level! -}
+-- * Type with values - a list with length value at type-level! * --
 data Zero
 data Succ n
 
