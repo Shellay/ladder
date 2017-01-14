@@ -1,12 +1,16 @@
+{-# LANGUAGE RankNTypes #-}
+
+{-
+A concise discuss here:  
+http://stackoverflow.com/questions/12468622/how-does-the-st-monad-work
+-}
+
 -- *** Explanation *** --
 
--- * update-in-place
--- * escapable
+-- * simulated "update-in-place"
+-- * non-escapable
 
 -- ST s a
-
--- * thread
-
 -- runST :: forall a. (forall s. ST s a) -> a
 
 -- * universal action in s
@@ -38,8 +42,9 @@ sumST xs = runST $ do
   -- runST :: (forall s. ST s a) -> a
   --   with a = Num a => a
 
--- * Any schematic a, b along the (ST s a)...(ST s b) monad has no
--- chance to be instantiated with any type expression containing s!
+
+-- * Any schematic a, b along the monad (ST s a)...(ST s b) has no
+-- chance to be instantiated with any type expression containing (s)!
 
 
 foldlST :: (a -> b -> a) -> a -> [b] -> a
@@ -51,7 +56,9 @@ foldlST f acc bs = runST $ do
   readSTRef accRef
 
 
+
 -- Error
+{-
 foo =
   let
     -- runST :: (forall s. ST s a) -> a
@@ -70,3 +77,46 @@ foo =
     c = runST $ readSTRef a
   in
     b `seq` c
+-}
+
+
+-- Unification should be done with isolation of the type (s)
+f :: (forall a. [a] -> b) -> Bool -> b
+f g flag | flag      = g "abcd"
+         | otherwise = g [1,2]
+
+-- length   :: forall a. [a] -> Int
+-- f length :: Bool -> Int
+--   where no type argument is out of scope
+-- OK.
+r1 = f length
+
+-- id   :: forall a. a -> a
+-- f id :: Bool -> ?a?
+--   with b = a
+--   where type argument (a) is out of scope
+-- FAIL.
+-- r2 = f id
+
+
+-- * Summarize
+{-
+runST :: forall a. (forall s. ST s a) -> a
+
+!! The type (s) in (ST s a) is a phatom trick and no value of type (s)
+is used. (s) is dedicated for context-protection through
+type-checking.
+
+!! When applying (runST) to a (ST s a) value, it must be guaranteed
+that (a) is not any type having (s) as its component, i.e. (a) must be
+irrelevant to (s) to be finally extracted.
+
+!! During the monad-do computation within monad (ST s), the monad (ST
+s) is "locked", and the operations (new, read, write, ...) are also
+consistently locked. 
+
+!! The stateful value from newSTRef, readSTRef, ... i.e. (STRef s t),
+(ST s ()) etc always rely on (s), thus not be able to accessed out of
+the (ST s) monad.
+
+-}
