@@ -35,5 +35,20 @@ instance Monad m => Functor (StateT s m) where
                                         return (g a, s1)
 
 instance Monad m => Applicative (StateT s m) where
-  (StateT fr) <*> (StateT r) = StateT $ \s -> do (f, s1) <- r s
-                                                 
+  pure a = StateT $ \s -> return (a, s)
+  (StateT fr) <*> (StateT r) = StateT $ \s -> do (f, s1) <- fr s
+                                                 (a, s2) <- r s
+                                                 return (f a, s2)
+
+instance Monad m => Monad (StateT s m) where
+  (StateT r) >>= f = StateT $ \s -> do (a, s1) <- r s
+                                       (b, s2) <- runStateT (f a) s1
+                                       return (b, s2)
+
+class MonadTrans t where
+  lift :: Monad m => m a -> t m a
+
+instance MonadTrans (StateT s) where
+  lift ma = StateT $ \s -> do a <- ma
+                              return (a, s)
+

@@ -123,5 +123,6 @@ main = do
   runMaybeT $
     -- askPassphrase :: (MaybeT IO) ()
     askPassphrase
-  -- runMaybeT askPassphrase :: IO (Maybe ())
+  -- runMaybeT askPassphrase :: IO (Maybe ()) -- does not match (IO ())
+  -- trivially make a (IO ())
   return ()
