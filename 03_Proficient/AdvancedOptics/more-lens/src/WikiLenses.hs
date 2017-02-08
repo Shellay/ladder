@@ -3,7 +3,7 @@ module TasteLenses where
 
 -- import Data.Functor.Contravariant
 import Control.Lens
-import Control.Monad.State
+import Control.Monad.Trans.State
 
 
 -- * A Taste of Lenses * --

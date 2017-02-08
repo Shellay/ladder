@@ -38,11 +38,11 @@ main = mapM_ print heteroListOfShowable
 -- * `forall` asserts commonality/intersection
 --   e.g. (x :: forall a. a)
 --        i.e. forall a. (x :: a)
---        means value x comforms to the INTERSECTION of all types
+--        means value x conforms to the INTERSECTION of all types
 --        where a is each type
 --   e.g. (x :: forall a. Show a => a)
 --        i.e. forall a. Show a => (x :: a)
---        means value x comforms to the INTERSECTION of all (Show) types,
+--        means value x conforms to the INTERSECTION of all (Show) types,
 --        where a is each (Show a) type
 
 -- e.g.
