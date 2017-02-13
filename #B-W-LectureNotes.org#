@@ -1,0 +1,731 @@
+* Preliminaries
+
+** Graphs
+
+   Roughly: "A category: a graph in which paths can be composed."
+
+   1. Def & Note
+      <<graph>>
+      - nodes/objects
+      - arrows :: (source/domain, target/codomain)
+	* `f : a → b`
+	* endoarrow/endomorphism
+      - (G0, G1) :: (G.nodes, G.arrows)
+      - loop, endoarrow/endomorphism
+
+   2. e.g.
+      - G = (G0, G1) == (nodes={1,2}, arrows={a,b,c})
+	where src(a) == tar(a) == src(b) == tar(c) == 1
+	      tar(b) == src(c) == 2
+	== ({1,2}, {1->1, 1->2, 2->1})
+
+   3. e.g.
+      <<large graph>>
+      - G := (<all-sets>, <all-functions>) == (S, F)
+	where {f.domain in S && f.codomain in S | f in F}
+	* Russell's paradox: nodes and arrows form *NO* sets
+
+   4. e.g.
+      - relation-on-set as graph
+      - A = {1,2,3}, B = {2,3,4}, α = {(1,2),(2,2),(2,3),(1,4)} : Relation
+      - *simple* graph G(N, A)
+	* {! (src(a1) == src(a2) && tar(a1) == tar(a2)) | a1, a2 in A}
+
+   5. e.g. data structure
+      - N: natural number as graph
+	* G({"1",n}, {succ=(n,n), 0=("1",n)})
+	  where "1" denotes *singleton set*
+
+
+** Homomorphism of graphs
+
+   Homom of graphs preserve abstract shape of the graph
+
+   1. Def
+      <<homomorphism>>
+      - homomorphism (φ : G → H) is a *pair of functions*
+	(φ₀ : G₀ → H₀,  φ₁ : G₁ → H₁)
+	and   if arrow (m → n) in G₁, then arrow (φ₀(m) → φ₀(n)) in H₁
+	      where u = (m → n)
+		    φ(u) = (φ₀(m) → φ₀(n))
+      - ReDef
+	with (src[G] : G₁ → G₀), (tar[G] : G₁ → G₀),
+	(φ₀ : G₀ → H₀,  φ₁ : G₁ → H₁) is homom iff
+	* src[H] ∘ φ₁ == φₒ ∘ src[G] &&
+	  tar[H] ∘ φ₁ == φₒ ∘ tar[G]
+	  where src[H] : H₁ → H₀
+		φ₁     : G₁ → H₁
+		src[H] ∘ φ₁ : G₁ → H₀
+	  and
+		src[H](φ₁(u)) == φ₀(m)
+	  φ₀(src[G](u)) == φ₀(m)
+
+   2. Notation (a : B → C)
+      - overloading
+	* set-theo func
+	* graph homom
+	* arrow in a graph
+      - *Arrow in a graph* per se!
+	* (function : set → set) within G(sets, functions)
+	* (homo : graph → graph) within G(graphs, homos)
+	* (arrow : node → node)  within G(nodes, arrows)
+      - (φ : G → H) == (φ₀ : G₀ → H₀, φ₁ : G₁ → H₁)
+	e.g.
+	* h = φ(g) where φ means φ
+	* μ = φ(m) where φ means φ₀
+	* ζ = φ(u) where φ means φ₁
+
+   3. Def
+      *identity homomorphism* (/idG/ : /G/ → /G/)
+      where (/idG/ ₀ = id : G₀ → G₀,
+	     /idG/ ₁ = id : G₁ → G₁)
+	    where (id : W → W) is the identity function on set W
+
+      i.e. { id(a) in /idG/ ₀ | a in G₀ } &&
+	   { (id(a) → id(b)) in /idG/ ₁ | (a → b) in G₁}
+
+   4. e.g.
+      Given
+      G({1,2,3,4}, {(1,4),(1,2),(2,2),(2,3)}),
+      H({S,F,Q}, {(S,Q),(S,F),(F,F),(F,F)});
+      * there is
+	(φ : G → H) = (φ₀, φ₁) where
+	  φ₀ = {1->S, 2->F, 3->F, 4->Q}
+	  φ₁ = {(1,4)->(S,Q), (1,2)->(S,F), (2,2)->(F,F), (2,3)->(F,F)}
+	and there are more possibilities
+
+   5. e.g.
+      if loop (u = n → n) in H₁,
+      then for *any* G, there is homom
+      (φ : G → H) where
+	φ₀ = {k->n for k in G₀}
+	φ₁ = {z->u for z in G₁}
+
+   6. Notation
+      φ₁(source)(f)
+      where source     :: node
+	    φ₁(source) :: arrow → arrow
+	    f          :: arrow
+	    φ₁(source)(f) :: arrow
+
+
+* Categories
+
+  Category: graph with rule for composing arrows to give another arrow
+
+** Basic definitions
+
+   1. Def 
+      <<path>>
+      - In G, k > 0, path[x,y,k] = seq(f₁,f₂,...,fₖ) where
+	* src[fₖ] = x
+	* tar[fᵢ] = src[fᵢ₋₁] for i in [2..k]
+	* tar[f₁] = y
+      - empty path path[x,x,0] = ()
+      - for f in G₁, (f) == path[_,_,1]
+
+   2. Def
+      Gₖ = {path[_,_,k] for path in /G/}
+      - Spec
+	G₀ is G.nodes
+	G₁ is G.arrows
+      - Def category G₂
+	G₂ = {(g,f) | f, g in G₁, tar(f) == src(g)}
+	* *composable pairs*
+
+   3. Def
+      <<category>>
+      graph with two functions (rule for comp arrows to arrow)
+      /C/ == (graph, func₂, func₁) == ((C₀, C₁), c : C₂ → C₁, u : C₀ → C₁)
+      - where
+	objects == C₀
+	arrows == C₁
+	composition == c; c(g, f) == g ∘ f == composite(g, f)
+	  and _(g, f) is a composable pair_
+	for object A in C, u(A) == id[A] == identity[A]
+      - with *properties*
+	* C-1 :: src(g ∘ f) == src(f) && tar(g ∘ f) == tar(g)
+	* C-2 :: (h ∘ g) ∘ f == h ∘ (g ∘ f)
+	* C-3 :: tar(id[A]) == src(id[A]) == A
+	* C-4 :: if (f : A → B) then (f ∘ id[A]) == (id[B] ∘ f) == f
+      - notes
+	(composition : G₁ × G₁ → G₁)
+
+   4. Termino
+      - syno
+	* morphism <=> arrow
+	* domain   <=> source
+	* codomain <=> target
+      - 1-to-1 correspondence:
+	(object A) <=> id[A]
+
+   5. Def
+      *small* :- objects and arrows constitute _sets_
+
+   6. Def
+      <<hom set>>
+      <<Hom>>
+      For objects A, B in C₀ of /C/, arrow u in C₁,
+      Hom(A,B) = {u | u in C₁, src(u) == A && tar(u) == B}
+      For (A,B,C), composition
+      Hom(B,C) × Hom(A,B) → Hom(A,C)
+      - *hom set* of (A,B), aka. /C/ (A,B), /C/ (AB)
+
+   7. Def
+      *locally small* of /C/ is when
+      {Hom(A,B) is a _set_ | A, B in /C/}
+
+   8. Def
+      for path=(f₁, ... , fₙ) in Cat, n > 2:
+      (f₁ ∘ ... ∘ fₙ) = (f₁ ∘ ... ∘ fₙ₋₁) ∘ fₙ
+
+   9. Prop *gen accociativity law*
+      for path=(f₁, ... , fₙ) in Cat, 1 < k < n,
+      (f₁ ∘ ... ∘ fₖ) ∘ (fₖ₊₁ ∘ ... ∘ fₙ) == f₁ ∘ ... ∘ fₙ
+
+   10. Def
+       little cat
+       - smallest: no objects, no arrows
+       - next: one object, one arrow : (({A}, {f=A->A}), {c}, {?}) : *1*
+       - op-plus:
+	 *1* + *1* == ({A,B}, {A->A, B->B}, {c}, {?})
+	 *2*       == ({C,D}, {C->C, D->D, C->D}, {c}, {?})
+
+   11. Def
+       Cat of sets: ((sets, functions), compositions) with (id[S] : S → S)
+       - composition assoc
+	 * (f ∘ id[S] = f && id[S] ∘ g = g)
+	   where src[f] = S && tar[g] = S
+       - Cat of sets: *Set*
+
+   12. Def
+       Cat of finite sets: *Fin*,
+       - objects are finite sets
+       - arrows are funcs between finite sets
+
+   13. Def
+       (*Partial function* : S × T, S₀ → T)
+       where S₀ is subset of S
+
+       - Cat Pfn ((sets, part-fns), c₁₂, c₀₁)
+	 where (f : S → T, f on S₀ ≤ S), f in part-fns
+	       (g : T → V, g on T₀ ≤ T), g in part-fns
+	       (g ∘ f : S → V, on {x in S₀ | f(x) in T₀}) and (g ∘ f)(x) = g(f(x))
+
+   14. Def relation
+       α : rel(S, T)
+       β : rel(T, U)
+       (β ∘ α) : rel(S, U)
+       where x in S && z in U && (x,z) in (β ∘ α) iff
+	     exists y that (x,y) in α && (y,z) in β
+       - Cat *Rel* ((sets, rels), c₁₂, c₀₁)
+	 * diag-rel Δ_{S} == {(x,x) | x in A}
+	   "diag" as if from matrix entry [i,i]
+
+
+** FPL as categories
+
+   FPs, deduction systems
+
+   1. FPL
+      - primitive types, operations, ctors
+	* produce more
+      - pure
+	* no var, no assg
+	* writing by constructing
+	* running by applying op to consts
+      - (no var) vs (rebindable)
+
+   2. Cat corrsp FP
+      - with properties
+	* FPL-1 :: prim data types
+	* FPL-2 :: const of each type
+	* FPL-3 :: ops, i.e. func betw types
+	* FPL-4 :: ctors
+
+   3. Cat /C/(/L/) of FP /L/
+      - with crsp _properties_
+
+	* A-1 :: "do-nothing op", i.e. id[A]
+	* A-2 :: additional type *1*
+		 each _const_ of type A (c : A) as _arrow_ (c : *1* → A)
+	* A-3 :: comp ctor
+		 (f : A → B) and (g : B → C)
+		 (f;g : A → C)
+		 also
+		 f;idB == idA;f == f
+
+   4. C(L)
+      - L with cat struct
+	* FPC-1 :: C(L).objects == L.types
+	* FPC-2 :: C(L).arrows == L.ops
+	* FPC-3 :: u.src == op.inp.type && u.tar == op.out.type
+		   (u  : S → T) in C₁
+		   (op : I → O) in L
+	* FPC-4 :: C(L).comp == L.ctor
+	* FPC-5 :: id
+
+   5. e.g. L with types NAT, BOOLEAN, CHAR
+      where in cat-style
+      - NAT with
+	* const-op (0 : *1* → NAT)
+	* op       (succ : NAT → NAT)
+      - BOOLEAN with
+	* const-op (true : *1* → BOOLEAN)
+		   (false : *1* → BOOLEAN)
+	* op       (¬ : BOOLEAN → BOOLEAN)
+	  where ¬ ∘ true = false
+		¬ ∘ false = true
+      - CHAR with
+	* const-op (c : *1* → CHAR)
+      - type conv
+	* ops (ord : CHAR → NAT)
+	      (chr : NAT → CHAR)
+	  where (chr ∘ ord) = id_{CHAR}
+
+   6. e.g.cont
+      C(L).objects == {NAT, BOOLEAN, CHAR, *1*}
+      C(L).arrows == all-programs
+
+
+** Mathematical structures as categories
+
+   1. Def
+      <<preordered set>> (S,α)
+      - where
+	* bin rel α on S :: \alpha subsets (S \times S)
+			    where xαy for (x,y) in α
+	* reflexive  :: xαx for x in S
+	* transitive :: xαy && yαz ==> xαz
+			r(x,y) && r(y,z) ==> r(x,z)
+			r(y,z) ∘ r(x,y) $ x == 
+	* with antisymmetry(α) becoming [[poset]]
+      - as C(S,α)
+	* CO-1 :: C(S,α).objects := S.elements
+	* CO-2 :: for xαy
+		  C(S,α).arrow[x,y] := (y,x) := xαy
+		  with (y,x) as (y <- x) since composition is right-to-left
+	* CO-3 :: for y, if no x that xαy
+		  no (y,x) in C(S,α)
+	* with
+	  + reflexivity:  (x,x) in C(S,α)
+	  + transitivity: (z,y) ∘ (y,x) == (z,x)
+
+   2. e.g
+      C(S,α) where S = {C,D}, α = {<C,C>, <C,D>, <D,D>}
+      which is *2*
+
+   3. Def
+      <<ordered set>> (S,α) 
+      where antisymm(α), i.e. (xαy && yαx ==> x = y)
+      <<poset>>
+      - poset :: par-ord-set
+		 e.g. (*R*, ≤)
+		 e.g. (Power(S), ⊆)
+      - useful! _cat as ord-set_
+      - note 
+
+	"called a partial order to reflect the fact that not every
+        pair of elements need be related"
+
+   4. Def
+      <<semigroup>>
+      *semigroup* (S, m : S × S → S) where S is its *underlying set*
+      - non-comm "multiply"
+	for s, t in S: m(s,t) == s*t
+	where maybe s*t ≠ t*s
+      - *commutative semigroup* where s*t == t*s
+
+   5. Def
+      *powers* where
+      * s¹ == s && s^{k} == s*s^{k-1} for k > 0
+      * s^{k}s^{n} == s^{k+n}
+      * (s^{k})^{n} == s^{kn}
+      * if commut, (st)^{k} == stst...st == s^{k}t^{k}
+
+   6. Def
+      <<empty semigroup>>
+      (Φ, ε : Φ × Φ → Φ)
+      where ε is the *empty function*
+
+   7. Def
+      for semigroup (S,m)
+      <<identity element>> e where {s*e == e*s == s | s in S}
+      - _at most one such e_
+	since for e₁, e₂: e₁*e₂ == e₂*e₁ == e₁ == e₂
+
+   8. Def
+      <<monoid>>
+      *monoid* is [[semigroup]] (S, m:S×S→S, e) with _one id-elem_ e
+      - is commut if m is commut
+      - non-empty
+
+   9. e.g.
+      - (Nat^{+}, +) --> semigroup, not monoid
+      - (Nat, +, 0) --> monoid
+      - *Kleene closure* (A*) where A is a set of strings
+	* 'abcd' in A* == {a,b,c,d}*
+	* '' in A*
+	* with op-concat, 
+          <<free monoid>> F(A) := (A*, ++, '')
+
+   10. Def
+       <<submonoid>>
+       *submonoid* of monoid M is (S subsets M, m) where
+       * id-elem(M) in S
+       * for s, t in S: s*t in S
+	 (S is *closed* under m)
+
+   11. e.g.
+       - Nat  => submonoid (Nat, plus, e=0)
+       - Nat⁺ => submonoid (Nat, mult, e=1)
+       - {0} forms monoid ({0}, mult, 0)
+       - {0} forms no submonoid of (Nat, mult), 
+	 i.e. (Nat, mult, e=1)
+	 since e=1 not in ({0}, mult, 0)
+
+   12. Crsp 
+       <<monoid as category>>
+       monoid(M) vs cat(C(M))
+       * CM-1 :: C(M).elems  := {⋄} 
+		 where ⋄ := M.underlyingSet
+       * CM-2 :: C(M).arrows := {(x : ⋄ ↦ ⋄) | x in M}
+       * CM-3 :: C(M).comp   := M.op
+
+   13. Rmrk
+       alternative defs
+       - [[monoid]] (M,•)
+	 as cat with one obj ⋄:=
+	 (({⋄}, {(x:⋄↦⋄) | x in M}), comp, id)
+       - [[preordered set]] (S,α)
+	 as cat with each Hom empty or singleton :=
+	 (S, {Hom(x,y) == \empty or Hom(x,y) == {xαy} | x,y in S})
+	 where id   := xαx (reflexivity)
+	       comp := {(xαy)∘(yαz)↦(xαz) | x,y,z in S}
+
+
+** Categories of sets with structure
+
+   1. Appl
+      *category of graph* - *GRF*
+      (objects=graphs, arrows=homomorphisms, composite, identity)
+      - composite
+	let (φ : /G/ → /H/), (ψ : /H/ → /K/)
+	    (u : m → n) in /G/
+	    (φ₁(u) : φ₀(m) → φ₀(n)) in /H/
+	    (ψ₁(φ₁(u)) : ψ₀φ₀(m) → ψ₀φ₀(n)) in /K/
+	    i.e. (ψ ∘ φ) is a graph homom
+      - identity
+	with id-homoms /idG/ , /idH/ and /idK/
+
+   2. Appl
+      *category of poset*
+      let (S, α) and (T, β) be posets,
+      with monotone(f : S → T) iff (xαy in S ==> f(x)βf(y) in T)
+      (objects=posets, arrows=monotone-functions, composite, identity)
+
+
+** Categories of algebraic structures
+
+   1. Def
+      <<sgp-homom>>
+      *semigroup homomorphism*
+      let (S, †), (T, ‡) be semigroups
+          homom(h : S → T)
+          if _{h(ss') == h(s)h(s') | s, s' in S}_
+          meaning h₀ : {s ↦ h(s) , s' ↦ h(s') , ...}
+	          h₁ : {(s,s') ↦ (h(s),h(s')) , ...}
+      <<mnd-homom>>
+      *monoid homomorphism*
+      let (S, †, ε), (T, ‡, ω) be monoids
+          where _{h(ss') == h(s)h(s') | s, s' in S}_
+	        h(ε) == ω --> prsv id
+
+   2. e.g.
+      - given monoid M(U, †, e), submonoid S(V, †, e)
+        with incl-f(h : V → U) being homom
+             # inclusion function maps (elem x of X) to (elem x of X's superset Y)
+             since {h(vv') == h(v)h(v') == vv' | v, v' in V} and
+                   {h(e) == e}
+      - given M(Int, mult, 1), N({0,1}, mult, 1)
+	with homo(h : Int → {0,1}) where h(even-int) == 0 && h(odd-int) == 1
+	     since {h(od * od) == h(od) * h(od) == 1,
+                    h(ev * od) == h(ev) * h(od) == 0,
+                    h(ev * ev) == h(ev) * h(ev) == 0} and
+		   {h(1) == 1}
+      - id-func is homom ({x → x}, {(x → x) → (id(x) → id(x))})
+	where id₀ = {x→x}, id₁ = {(x→x)→(x,x)}
+
+      - Def
+	*Sem* is cat of semigroups and semigroup-homoms
+	*Mon* is cat of monoids and monoid-homoms
+
+   3. e.g.
+      - let S = sgp({s}, mult); N⁺ = sgp(Z⁺, add)
+	there is sgp-homom (p : N⁺ → S) where p(k) = sᵏ
+	         where {p(k+n) == p(k)p(n) == s^{k}s^{n} | k, n in Z⁺} 
+		 using _DEF([[sgp-homom]])_
+
+   4. e.g. 
+      sgp-homom between monoids 
+      may _not_ be mnd-homom
+      - let E = monoid({e}, mult, e)
+	    Z = monoid(Int, mult, ω=1)
+	    h = (h : {e} → Int, h(e) = 0)
+	        having {h(ee) == h(e)h(e) == 0 | e in E}
+	        thus h is sgp-homom
+	    but h(e) == 0 != ω
+	        thus h is not mnd-homom
+	
+   5. Def
+      *inverse* of homom (exist?)
+      - let (f : S → T) be bij sgp-homom
+	    {f(ss') == f(s)f(s') | s,s' in S} with DEF(sgp-homom) 
+	    let (g : T → S) = f^{-1}
+	    needing {g(t)g(t') == g(tt') | t,t' in T}
+	        <== {f(g(t)g(t')) == f(g(tt')) | t,t' in T}
+		=== {f(ss') == tt' | t,t' in T} where s = g(t), s' = g(t')
+	        === {f(g(t))f(g(t')) == tt' | t,t' in T } with {f... | s,s' in S}
+		=== {tt' == h(t)h(t') | t,t' in T}        with h = f ∘ g
+		OK.
+      - true for alge-structs, not for _posets_
+	
+   6. Def
+      *semigroup isomorphism* 
+      sgp-homom(h), bij(h), g == inv(h), sgp-homom(g)
+      ==> sgp-isom(h), isomorphic(h, g)
+      - e.g. 
+	M({0,1,2,3}, \mu_x_y=(x+y)%4, 0)
+	N({1,2,3,4}, \nu_x_y=(x*y)%5, 1)
+	* there are two distinct isoms between M and N
+	* which 2???
+	
+   7. Rem
+      Kleene closure induces homoms
+      - let (f : A → B)
+	    M_A({a_i}*, ++, ())
+	    M_B({b_j}*, ++, ())
+	    (f* : A* → B*) where f*(a_1,...,a_{k}) = (f(a_1),...,f(a_k)) and
+	                          f*() = ()
+				  f*(a) = f(a)
+	    let a:=(a_1,...,a_m), a':=(a'_1,...a'_n) in A*
+	    f*(a)f*(a') == f*(a_1,...,a_m)f*(a'_1,...a'_n)
+	                == (f(a_1),...)(f(a'_1),...)
+	                == (f(a_1),...,f(a'_1),...)
+	                == f*(a_1,...,a'_1,...)
+	                == f*(aa')
+	    i.e. monoid-homom(f*)
+	* let g = inv(f)
+          isom(g : B → A) ==> isom(g* : B* → A*)
+	
+   8. Func
+      Z==Int forms (Int, plus, 0) and (Int, mult, 1)
+      Z_k={0,1,...,k-1} (*remainders* of k) forms
+      (Z_k, plus(%k), 0) and (Z_k, mult(%k), 1)
+
+   9. Def
+      let k in Int && k > 0, n in Int,
+      r == (n % k)
+        where r in Z_k, n = qk +r, 0 \le r \lt k
+      op (r +ₖ s) == (r + s) % k
+
+   10. Propo
+       (*Zₖ*, +ₖ, 0)
+      
+   11. Propo
+       (f : n ↦ n % k) is monoid-homom 
+       - from (*Z*,+,0) to (*Zₖ*,+ₖ,0)
+	 since f(n₁+n₂) == f(n₁)+ₖf(n₂)
+	   <== n₁ == q₁k + r₁
+	       n₂ == q₂k + r₂
+	       n₁+n₂ == (q₁+q₂)k + (r₁+r₂)
+	       f(n₁+n₂) == (r₁+r₂)%k == LHS
+	       f(n₁) == r₁, f(n₂) == r₂
+	       f(n₁)+ₖf(n₂) == (r₁+r₂)%k with DEF(+ₖ) == RHS == LHS
+	       OK.
+
+       - from (*Z*,*,0) to (*Zₖ*,*ₖ,0)
+
+
+** Constructions on categories
+
+   1. Def
+      *subcategory* /D/ of category /C/
+      - where
+	* S-1 :: (D₀ ⊆ C₀) &&
+		 (D₁ ⊆ C₁)
+	* S-2 :: {u_D.src == u_c.src && u_D.tar == u_c.tar | u_D in D₁}
+		 i.e. Hom_D(A,B) ⊆ Hom_C(A,B)
+	* S-3 :: {id_A in /C/ | A in D₀}
+	* S-4 :: {(g ∘ f) in /C/ | f, g in /D/}
+
+   2. e.g.
+      cat *Fin* of finite sets and all func between 'em
+      subcat(*Fin*, *Set*).
+      cat *SetPf* of sets and partial funcs
+      subcat(*Set*, *SetPf*).
+      - fin(A), fin(B) ==> Hom_{*Fin*}(A,B) == Hom_{*Set*}(A,B)
+      - *Set₀* == *SetPf₀*
+	however, Hom_{*Set*}(A,B) ⊆ Hom_{*SetPf*}(A,B)
+      
+   3. Def
+      <<full-cat>>
+      subcat(/D/, /C/), 
+      {Hom_{/D/}(A,B) == Hom_{/C/}(A,B) | A,B in D₀} ==>
+      *full-subcategory* (/D/, /C/)
+      - e.g.
+	* fu-subcat(*Fin*, *Set*).
+	* ¬fu-subcat(*Set*, *SetPf*).
+      - maybe (D₀ != C₀)
+
+   4. Def
+      <<wide-cat>>
+      subcat(/D/, /C/), 
+      (D₀ == C₀) ==>
+      *wide-subcategory* (/D/, /C/)
+      - e.g.
+	* wi-subcat(*Set*, *SetPf*)
+      - maybe (Hom_{/D/}(A,B) != Hom_{/C/}(A,B))
+      
+   5. e.g.
+      monoids ⊂ cat(semigroups),
+        where cat(semigroups) == (sgps, [[sgp-homom]]s)
+      mnd-homom(m₁, m₂) ⊂ sgp-homom(m₁, m₂),
+        where cat(monoids) == (mnds, [[mnd-homom]]s)
+      subcat(cat(monoids), cat(semigroups)),
+      cat(monoids) is
+      * not full -- mnd-homom(M, N) (⊂ i.e. !=) sgp-homom(M, N)
+      * not wide -- {all-mnds} (⊂ i.e. !=) {all-sgps}
+
+   6. Def
+      <<product>>
+      *product of categories*
+      cat(/C/), cat(/D/), 
+      (/C/×/D/)₀ := {(C,D) | C in /C/, D in /D/}.
+      (/C/×/D/)₁ := {(f,g) : (C,D) → (C',D') | f in C₁, g in D₁}
+      (/C/×/D/)_{id} := (id_C, id_D)
+      composite where
+        (f',g') ∘ (f, g) := (f'∘f, g'∘g) : (C,D) → (C'',D'')
+
+   7. Def
+      <<dual of category>>
+      <<opposite of category>>
+      with /C/, define /C/^{op} where
+      - D-1 :: (C^{op}₀, C^{op}₁) := (C₀, C₁)
+      - D-2 :: (f : A ↦ B) in C₁ ==> (f : B ↦ A) in C^{op}^{}₁
+      - D-3 :: h==(g∘f) in /C/ ==> h==(f∘g) in /C/^{op}
+      - id remains
+
+   8. e.g.
+      <<dual of monoid>>
+      with mnd(M), M^{op} == op(C(M))^{}
+        where C is [[monoid as category]]
+	      xy == z in M ==> yx == z in M^{op}
+      - note commut(M) ==> C(M) is dual(C(M))
+      - e.g.
+	for C(P) with [[poset]] P
+	C((*Z*,≤)) == dual(C((*Z*,≥)))
+	where C.composite == {a ≤' c | a,b,c in *Z* , a≤b, b≤c}
+	                     where ≤' == (≤ ∘ ≤)
+	      D.composite == {a ≥' c | a,b,c in *Z* , b≥a, c≥b}
+	                     where ≥' == (≥ ∘ ≥)
+	
+   9. note
+      arrows in prod-cat may not be functions, but only arrows
+      - e.g.
+	with *Set*, 
+	let A := en-alpb,
+	(v : A → {0,1}) where v(consonant)↦0 && v(vowel)↦1,
+	let a := (id_A,v) : (A,A)×(A,{0,1}) in (*Set* × *Set*),
+	a is not function
+	
+	also, for v in *Setᵒᵖ* where (v : {0,1} → A)
+	v is not function
+	
+   10. Def
+       <<slice category>> with /C/ and A ∈ /C/.objects
+       /C/A
+       - SC-1 :: /C/A.objects := 
+		 {(f:C→A) | C in /C/.objects}
+       - SC-2 :: /C/A.arrows  := 
+		 {(h:C'→C := (f↦f')) | 
+		  (f:C→A),(f':C'→A) in /C/.arrows,
+		  f == f' ∘ h}
+       - SC-3 :: comp(h:f→f', h':f'→f'') :=
+		 (h'∘h : f→f'')
+
+   11. e.g.
+       with poset (P,α) and cat C(P,α)
+       for x in P, 
+       /C(P,α)/_x == C({y | x,y in P, xαy}, α)
+
+   12. Def
+       <<S-indexed set>> (X, τ:X→S)
+       where of-type(s) == (∀x ∈ X. τ(x)==s)
+             typed-set(X, S).
+	     --> using s to index the subset Xₛ of X
+       alt, {τ⁻¹(s) | s in S} == {Xₛ ⊆ X | s in S}
+            namely *family of sets indexed by S*
+	
+   13. e.g.
+       G == G₀ ∪ G₁ is typed by (τ:G→{0,1})
+       where τ(node)↦0 && τ(arrow)↦1
+
+   14. Def
+       <<indexed function>>
+       let (f : typed-set(X,S) → typed-set(X',S)),
+       f is an arrow in *Set*/S,
+       f is *indexed function* or *typed function*,
+       --> /C/A == typed-set(C.objects, A) 
+
+   15. e.g.
+       homom(f : /G/ → /H/) crpd-to typed-function
+       using DEF([[homomorphism]])
+       where ∀x ∈ G₀, t==f₀(x) ∈ H₀
+             --> x has type t, may be more such x's
+             ∀(x↦y) ∈ G₁, (t↦s)==f₁(x→y) ∈ H₁
+             --> (x↦y) has type (t↦s)
+       
+   16. Def
+       <<free category>> gen by graph
+       for graph G, free cat F(G)
+       where F(G).objects := G.nodes
+             F(G).arrows  := G.paths
+             F(G).comp    := (f₁,...,fₖ)∘(fₖ₊₁,...,fₙ) == (f₁,...,fₙ)
+	     F(G).id      := G.path[A,A,0]
+       - aka *path catogory* of G
+	 
+   17. e.g.
+       free cat of 
+       G({*1*, *n*}, {succ=(*n*, *n*), 0=(*1*, *n*)})
+       has arrows (id₁		: *1* ↦ *1*),
+                  (succᵏ	: *n* ↦ *n*),
+		  (succᵏ ∘ 0	: *1* ↦ *n*)
+       with composite (succᵏ∘succᵐ == succᵏ⁺ᵐ)
+       
+   18. note
+       with any graph G
+       F(G) csrp Kleene-closure(G)
+       where
+       path crsp string
+
+
+* Properties of objects and arrows
+
+* Functors
+
+* Diagrams and naturality
+
+* Products and sums
+
+* Cartesian closed categories
+
+* Limits and colimits
+
+* Adjoints
+
+* Triples
+
+* Toposes
+
+* Categories with monoidal structure
